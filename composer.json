@@ -1,0 +1,31 @@
+{
+    "name": "sztyup/datatables",
+    "description": "Datatables serverside and html generator for LaravelDoctrine",
+    "keywords": ["datatable", "datatables", "data-table", "grid", "table", "datagrid", "pagination"],
+    "homepage": "https://github.com/sztyup/datatables",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "stwe"
+        },
+        {
+            "name": "SgDatatablesBundle contributors",
+            "homepage": "https://github.com/stwe/DatatablesBundle/graphs/contributors"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/sztyup/datatables/issues"
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/contracts": "^5.5",
+        "symfony/options-resolver": "^3.0|^4.0",
+        "symfony/property-access": "^3.0|^4.0",
+        "laravel-doctrine/orm": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sztyup\\Datatable": "src/Datatable"
+        }
+    }
+}
