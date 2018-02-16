@@ -259,7 +259,7 @@ abstract class AbstractDatatable implements DatatableInterface
     private function validateName()
     {
         if (1 !== preg_match(self::NAME_REGEX, $this->getName())) {
-            throw new Exception('AbstractDatatable::validateName(): The result of the getName method can only contain letters, numbers, underscore and dashes.');
+            throw new Exception('The result of the getName method can only contain letters, numbers, _, -');
         }
     }
 }

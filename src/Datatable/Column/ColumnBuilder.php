@@ -14,7 +14,7 @@ namespace Sztyup\Datatable\Column;
 use Illuminate\Contracts\Container\Container;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\MappingException;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -211,13 +211,7 @@ class ColumnBuilder
      */
     private function getMetadata($entityName)
     {
-        try {
-            $metadata = $this->em->getMetadataFactory()->getMetadataFor($entityName);
-        } catch (MappingException $e) {
-            throw new Exception('DatatableQueryBuilder::getMetadata(): Given object '.$entityName.' is not a Doctrine Entity.');
-        }
-
-        return $metadata;
+        return $this->em->getMetadataFactory()->getMetadataFor($entityName);
     }
 
     /**

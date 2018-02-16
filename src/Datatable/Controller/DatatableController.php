@@ -49,14 +49,8 @@ class DatatableController extends Controller
 
             // additional params
             $entityClassName = $request->request->get('entityClassName'); // e.g. AppBundle\Entity\Post
-            $token = $request->request->get('token');
             $originalTypeOfField = $request->request->get('originalTypeOfField');
             $path = $request->request->get('path'); // for toMany - the current element
-
-            // check token
-            if (!$this->isCsrfTokenValid('sg-datatables-editable', $token)) {
-                throw new AccessDeniedException('DatatableController::editAction(): The CSRF token is invalid.');
-            }
 
             // get an object by its primary key
             $entity = $this->getEntityByPk($entityClassName, $pk);
@@ -74,9 +68,8 @@ class DatatableController extends Controller
             null !== $path ? $accessor->setValue($entity, $path, $value) : $accessor->setValue($entity, $field, $value);
 
             // save all
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $this->em->persist($entity);
+            $this->em->flush();
 
             return new Response('Success', 200);
         }
@@ -102,7 +95,7 @@ class DatatableController extends Controller
 
         $entity = $em->getRepository($entityClassName)->find($pk);
         if (!$entity) {
-            throw $this->createNotFoundException('DatatableController::getEntityByPk(): The entity does not exist.');
+            throw $this->createNotFoundException('The entity does not exist.');
         }
 
         return $entity;
@@ -141,7 +134,7 @@ class DatatableController extends Controller
                 $value = (float) $value;
                 break;
             default:
-                throw new Exception("DatatableController::prepareValue(): The field type {$originalTypeOfField} is not editable.");
+                throw new Exception("The field type {$originalTypeOfField} is not editable.");
         }
 
         return $value;
@@ -168,7 +161,7 @@ class DatatableController extends Controller
         } elseif ($str === 'false' || $str === '0') {
             return false;
         } else {
-            throw new Exception('DatatableController::strToBool(): Cannot convert string to boolean, expected string "true" or "false".');
+            throw new Exception('Cannot convert string to boolean, expected string "true" or "false".');
         }
     }
 }

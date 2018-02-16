@@ -121,7 +121,7 @@ class Select2Filter extends SelectFilter
 
         $resolver->setNormalizer('allow_clear', function (Options $options, $value) {
             if (null === $options['placeholder'] && true === $value) {
-                throw new Exception('Select2Filter::configureOptions(): The allow_clear option will only work if a placeholder is set.');
+                throw new Exception('The allow_clear option will only work if a placeholder is set.');
             }
 
             return $value;

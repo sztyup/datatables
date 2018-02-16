@@ -186,7 +186,7 @@ class ImageColumn extends AbstractColumn
 
         $resolver->setNormalizer('enlarge', function (Options $options, $value) {
             if (null === $options['imagine_filter_enlarged'] && true === $value) {
-                throw new Exception('ImageColumn::configureOptions(): For the enlarge option, imagine_filter_enlarged should not be null.');
+                throw new Exception('For the enlarge option, imagine_filter_enlarged should not be null.');
             }
 
             return $value;

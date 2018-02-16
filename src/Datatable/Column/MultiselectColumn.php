@@ -193,7 +193,7 @@ class MultiselectColumn extends ActionColumn
                 $this->actions[] = $newAction->set($action);
             }
         } else {
-            throw new Exception('MultiselectColumn::setActions(): The actions array should contain at least one element.');
+            throw new Exception('The actions array should contain at least one element.');
         }
 
         return $this;

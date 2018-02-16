@@ -14,7 +14,7 @@ namespace Sztyup\Datatable;
 use Doctrine\DBAL\DBALException;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\MappingException;
+
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -538,7 +538,7 @@ class DatatableQueryBuilder
                 $qb->setFirstResult($this->requestParams['start'])->setMaxResults($this->requestParams['length']);
             }
         } elseif ($this->ajax->getPipeline() > 0) {
-            throw new Exception('DatatableQueryBuilder::setLimit(): For disabled paging, the ajax Pipeline-Option must be turned off.');
+            throw new Exception('For disabled paging, the ajax Pipeline-Option must be turned off.');
         }
 
         return $this;
@@ -778,13 +778,7 @@ class DatatableQueryBuilder
      */
     private function getMetadata($entityName)
     {
-        try {
-            $metadata = $this->em->getMetadataFactory()->getMetadataFor($entityName);
-        } catch (MappingException $e) {
-            throw new Exception('DatatableQueryBuilder::getMetadata(): Given object '.$entityName.' is not a Doctrine Entity.');
-        }
-
-        return $metadata;
+        return $metadata = $this->em->getMetadataFactory()->getMetadataFor($entityName);
     }
 
     /**
