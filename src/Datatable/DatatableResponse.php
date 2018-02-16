@@ -11,11 +11,10 @@
 
 namespace Sztyup\Datatable;
 
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Sztyup\Datatable\Column\ColumnInterface;
 
 /**
@@ -63,12 +62,13 @@ class DatatableResponse
     /**
      * DatatableResponse constructor.
      *
-     * @param RequestStack $requestStack
+     * @param Request $request
+     * @param DatatableInterface $datatable
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(Request $request, DatatableInterface $datatable)
     {
-        $this->request = $requestStack->getCurrentRequest();
-        $this->datatable = null;
+        $this->request = $request;
+        $this->datatable = $datatable;
         $this->datatableQueryBuilder = null;
     }
 
@@ -88,24 +88,13 @@ class DatatableResponse
     {
         $val = $this->validateColumnsPositions($datatable);
         if (is_int($val)) {
-            throw new Exception("DatatableResponse::setDatatable(): The Column with the index $val is on a not allowed position.");
+            throw new Exception("The Column with the index $val is on a not allowed position.");
         };
 
         $this->datatable = $datatable;
-        $this->datatableQueryBuilder = null;
+        $this->datatableQueryBuilder = $this->createDatatableQueryBuilder();
 
         return $this;
-    }
-
-    /**
-     * Get DatatableQueryBuilder instance.
-     *
-     * @return DatatableQueryBuilder
-     * @throws Exception
-     */
-    public function getDatatableQueryBuilder()
-    {
-        return $this->datatableQueryBuilder ?? $this->createDatatableQueryBuilder();
     }
 
     //-------------------------------------------------
@@ -115,29 +104,24 @@ class DatatableResponse
     /**
      * Get response.
      *
-     * @param bool $countAllResults
-     * @param bool $outputWalkers
-     * @param bool $fetchJoinCollection
-     *
      * @return JsonResponse
      * @throws Exception
      * @throws \TypeError
      */
-    public function getResponse(
-        bool $countAllResults = true,
-        bool $outputWalkers = false,
-        bool $fetchJoinCollection = true
-    ) {
+    public function getResponse()
+    {
         if (null === $this->datatable) {
-            throw new Exception('DatatableResponse::getResponse(): Set a Datatable class with setDatatable().');
+            throw new Exception('Set a Datatable class with setDatatable().');
         }
+
+        $this->setDatatable($this->datatable);
 
         if (null === $this->datatableQueryBuilder) {
-            throw new Exception('DatatableResponse::getResponse(): A DatatableQueryBuilder instance is needed. Call getDatatableQueryBuilder().');
+            throw new Exception('A DatatableQueryBuilder instance is needed. Call getDatatableQueryBuilder().');
         }
 
-        $paginator = new Paginator($this->datatableQueryBuilder->execute(), $fetchJoinCollection);
-        $paginator->setUseOutputWalkers($outputWalkers);
+        $paginator = new Paginator($this->datatableQueryBuilder->execute(), true);
+        $paginator->setUseOutputWalkers(false);
 
         $formatter = new DatatableFormatter();
         $formatter->runFormatter($paginator, $this->datatable);
@@ -145,7 +129,7 @@ class DatatableResponse
         $outputHeader = [
             'draw' => (int) $this->requestParams['draw'],
             'recordsFiltered' => count($paginator),
-            'recordsTotal' => $countAllResults ? (int) $this->datatableQueryBuilder->getCountAllResults() : 0,
+            'recordsTotal' => (int) $this->datatableQueryBuilder->getCountAllResults(),
         ];
 
         return new JsonResponse(array_merge($outputHeader, $formatter->getOutput()));
@@ -164,7 +148,7 @@ class DatatableResponse
     private function createDatatableQueryBuilder()
     {
         if (null === $this->datatable) {
-            throw new Exception('DatatableResponse::getDatatableQueryBuilder(): Set a Datatable class with setDatatable().');
+            throw new Exception('Set a Datatable class with setDatatable().');
         }
 
         $this->requestParams = $this->getRequestParams();
