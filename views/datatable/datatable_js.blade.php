@@ -1,16 +1,8 @@
-{##
- # This file is part of the SgDatatablesBundle package.
- #
- # (c) stwe <https://github.com/stwe/DatatablesBundle>
- #
- # For the full copyright and license information, please view the LICENSE
- # file that was distributed with this source code.
- #}
 <script type="text/javascript">
 
     $(document).ready(function () {
 
-        var selector = "#sg-datatables-{{ sg_datatables_view.name }}";
+        var selector = "#sg-datatables-{{ $datatable->name }}";
         var oTable;
 
         var defaults = {
@@ -49,11 +41,11 @@
         };
 
         function postCreateDatatable(pipeline) {
-            {% for column in sg_datatables_view.columnBuilder.columns %}
-                {% if column.renderPostCreateDatatableJsContent is not null %}
-                    {{ column.renderPostCreateDatatableJsContent|raw }}
-                {% endif %}
-            {% endfor %}
+            @foreach($datatable->columnBuilder->columns as $column)
+                @if($column->renderPostCreateDatatableJsContent)
+                    {!! $column->renderPostCreateDatatableJsContent !!}
+                @endif
+            @endforeach
         }
 
         function createDatatable() {
@@ -73,20 +65,20 @@
             
                 oTable = $(selector)
                     .DataTable(defaults)
-                        .on('draw.dt', function() { postCreateDatatable({{ sg_datatables_view.ajax.pipeline}}) })
+                        .on('draw.dt', function() { postCreateDatatable({{ $datatable->ajax->pipeline}}) })
                     ;
 
-                {% if true == sg_datatables_view.options.individualFiltering %}
+                @if($datatable->options->individualFiltering)
                     @include('datatable.search')
-                {% endif %}
+                @endif
             }
         }
 
         createDatatable();
 
-        {% if sg_datatables_view.columnBuilder.uniqueColumn('multiselect') is not null %}
-            {{ sg_datatables_render_multiselect_actions( sg_datatables_view.columnBuilder.uniqueColumn('multiselect'), sg_datatables_view.ajax.pipeline) }}
-        {% endif %}
+        @if($datatable->columnBuilder->uniqueColumn('multiselect'))
+            {{ $sg_datatables_render_multiselect_actions( $datatable->columnBuilder->uniqueColumn('multiselect'), $datatable->ajax->pipeline) }}
+        @endif
     });
 
 </script>

@@ -6,59 +6,59 @@
  # For the full copyright and license information, please view the LICENSE
  # file that was distributed with this source code.
  #}
-{% if sg_datatables_view.options.deferLoading is not same as(null) %}
-    "deferLoading": {{ sg_datatables_view.options.deferLoading }},
+{% if datatable.options.deferLoading is not same as(null) %}
+    "deferLoading": {{ datatable.options.deferLoading }},
 {% endif %}
-{% if sg_datatables_view.options.displayStart is not same as(null) %}
-    "displayStart": {{ sg_datatables_view.options.displayStart }},
+{% if datatable.options.displayStart is not same as(null) %}
+    "displayStart": {{ datatable.options.displayStart }},
 {% endif %}
-{% if sg_datatables_view.options.dom is not same as(null) %}
-    "dom": "{{ sg_datatables_view.options.dom|e('js') }}",
+{% if datatable.options.dom is not same as(null) %}
+    "dom": "{{ datatable.options.dom|e('js') }}",
 {% endif %}
-{% if sg_datatables_view.options.lengthMenu is not same as(null) %}
-    "lengthMenu": {{ sg_datatables_view.options.lengthMenu|raw }},
+{% if datatable.options.lengthMenu is not same as(null) %}
+    "lengthMenu": {{ datatable.options.lengthMenu|raw }},
 {% endif %}
-{% if sg_datatables_view.options.order is not same as(null) %}
-    "order": {{ sg_datatables_view.options.order|raw }},
+{% if datatable.options.order is not same as(null) %}
+    "order": {{ datatable.options.order|raw }},
 {% endif %}
-{% if sg_datatables_view.options.orderCellsTop is not same as(null) %}
-    "orderCellsTop": {{ sg_datatables_view.options.orderCellsTop|sg_datatables_bool_var }},
+{% if datatable.options.orderCellsTop is not same as(null) %}
+    "orderCellsTop": {{ datatable.options.orderCellsTop|sg_datatables_bool_var }},
 {% endif %}
-{% if sg_datatables_view.options.orderClasses is not same as(null) %}
-    "orderClasses": {{ sg_datatables_view.options.orderClasses|sg_datatables_bool_var }},
+{% if datatable.options.orderClasses is not same as(null) %}
+    "orderClasses": {{ datatable.options.orderClasses|sg_datatables_bool_var }},
 {% endif %}
-{% if sg_datatables_view.options.orderFixed is not same as(null) %}
-    "orderFixed": {{ sg_datatables_view.options.orderFixed|raw }},
+{% if datatable.options.orderFixed is not same as(null) %}
+    "orderFixed": {{ datatable.options.orderFixed|raw }},
 {% endif %}
-{% if sg_datatables_view.options.orderMulti is not same as(null) %}
-    "orderMulti": {{ sg_datatables_view.options.orderMulti|sg_datatables_bool_var }},
+{% if datatable.options.orderMulti is not same as(null) %}
+    "orderMulti": {{ datatable.options.orderMulti|sg_datatables_bool_var }},
 {% endif %}
-{% if sg_datatables_view.options.pageLength is not same as(null) %}
-    "pageLength": {{ sg_datatables_view.options.pageLength }},
+{% if datatable.options.pageLength is not same as(null) %}
+    "pageLength": {{ datatable.options.pageLength }},
 {% endif %}
-{% if sg_datatables_view.options.pagingType is not same as(null) %}
-    "pagingType": "{{ sg_datatables_view.options.pagingType }}",
+{% if datatable.options.pagingType is not same as(null) %}
+    "pagingType": "{{ datatable.options.pagingType }}",
 {% endif %}
-{% if sg_datatables_view.options.renderer is not same as(null) %}
-    "renderer": "{{ sg_datatables_view.options.renderer }}",
+{% if datatable.options.renderer is not same as(null) %}
+    "renderer": "{{ datatable.options.renderer }}",
 {% endif %}
-{% if sg_datatables_view.options.retrieve is not same as(null) %}
-    "retrieve": {{ sg_datatables_view.options.retrieve|sg_datatables_bool_var }},
+{% if datatable.options.retrieve is not same as(null) %}
+    "retrieve": {{ datatable.options.retrieve|sg_datatables_bool_var }},
 {% endif %}
-{% if sg_datatables_view.options.rowId is not same as(null) %}
-    "rowId": "{{ sg_datatables_view.options.rowId }}",
+{% if datatable.options.rowId is not same as(null) %}
+    "rowId": "{{ datatable.options.rowId }}",
 {% endif %}
-{% if sg_datatables_view.options.scrollCollapse is not same as(null) %}
-    "scrollCollapse": {{ sg_datatables_view.options.scrollCollapse|sg_datatables_bool_var }},
+{% if datatable.options.scrollCollapse is not same as(null) %}
+    "scrollCollapse": {{ datatable.options.scrollCollapse|sg_datatables_bool_var }},
 {% endif %}
-{% if sg_datatables_view.options.searchDelay is not same as(null) %}
-    "searchDelay": {{ sg_datatables_view.options.searchDelay }},
+{% if datatable.options.searchDelay is not same as(null) %}
+    "searchDelay": {{ datatable.options.searchDelay }},
 {% endif %}
-{% if sg_datatables_view.options.stateDuration is not same as(null) %}
-    "stateDuration": {{ sg_datatables_view.options.stateDuration }},
+{% if datatable.options.stateDuration is not same as(null) %}
+    "stateDuration": {{ datatable.options.stateDuration }},
 {% endif %}
-{% if sg_datatables_view.options.stripeClasses is not same as(null) %}
-    "stripeClasses": {{ sg_datatables_view.options.stripeClasses|raw }},
+{% if datatable.options.stripeClasses is not same as(null) %}
+    "stripeClasses": {{ datatable.options.stripeClasses|raw }},
 {% endif %}
 
 
