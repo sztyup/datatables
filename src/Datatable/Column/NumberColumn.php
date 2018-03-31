@@ -250,6 +250,6 @@ class NumberColumn extends Column
             'column_class_editable_selector' => $this->getColumnClassEditableSelector(),
             'pk' => $pk,
             'path' => $path,
-        ]);
+        ])->render();
     }
 }

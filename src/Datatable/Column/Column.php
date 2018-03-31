@@ -107,7 +107,7 @@ class Column extends AbstractColumn
                     'entity_class_name' => $this->getEntityClassName(),
                     'column_dql' => $this->dql,
                     'original_type_of_field' => $this->getOriginalTypeOfField(),
-            ]);
+            ])->render();
         }
 
         return null;
@@ -159,6 +159,6 @@ class Column extends AbstractColumn
                 'column_class_editable_selector' => $this->getColumnClassEditableSelector(),
                 'pk' => $pk,
                 'path' => $path,
-        ]);
+        ])->render();
     }
 }

@@ -110,7 +110,7 @@ class MultiselectColumn extends ActionColumn
             'start_html' => $this->startHtml,
             'end_html' => $this->endHtml,
             'render_if_cbox' => $row['sg_datatables_cbox'],
-        ]);
+        ])->render();
     }
 
     /**

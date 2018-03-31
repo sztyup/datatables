@@ -149,7 +149,7 @@ class ActionColumn extends AbstractColumn
                 'render_if_actions' => $row['sg_datatables_actions'][$this->index],
                 'start_html_container' => $this->startHtml,
                 'end_html_container' => $this->endHtml,
-        ]);
+        ])->render();
     }
 
     /**

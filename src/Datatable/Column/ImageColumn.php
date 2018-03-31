@@ -385,6 +385,6 @@ class ImageColumn extends AbstractColumn
             'data' => $data,
             'image' => $this,
             'image_class' => 'sg-datatables-'.$this->getDatatableName().$classSuffix,
-        ]);
+        ])->render();
     }
 }

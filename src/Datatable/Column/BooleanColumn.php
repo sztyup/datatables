@@ -151,7 +151,7 @@ class BooleanColumn extends AbstractColumn
                     'entity_class_name' => $this->getEntityClassName(),
                     'column_dql' => $this->dql,
                     'original_type_of_field' => $this->getOriginalTypeOfField(),
-            ]);
+            ])->render();
         }
 
         return null;
@@ -351,6 +351,6 @@ class BooleanColumn extends AbstractColumn
         return $this->viewFactory->make(
             $this->getCellContentTemplate(),
             $renderVars
-        );
+        )->render();
     }
 }
