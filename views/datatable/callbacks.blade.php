@@ -1,56 +1,56 @@
-@if($datatable->callbacks->createdRow)
-    "createdRow": @include($datatable->callback->createdRow['template'], $datatable->callbacks->createdRow['vars'] ?? []),
+@if($datatable->callbacks->getCreatedRow())
+    "createdRow": @include($datatable->callback->getCreatedRow()['template'], $datatable->callbacks->getCreatedRow()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->drawCallback)
-    "drawCallback": @include($datatable->callbacks->drawCallback['template'], $datatable->callbacks->drawCallback['vars'] ?? []),
+@if($datatable->callbacks->getDrawCallback())
+    "drawCallback": @include($datatable->callbacks->getDrawCallback()['template'], $datatable->callbacks->getDrawCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->footerCallback)
-    "footerCallback": @include($datatable->callbacks->footerCallback['template'], $datatable->callbacks->footerCallback['vars'] ?? []),
+@if($datatable->callbacks->getFooterCallback())
+    "footerCallback": @include($datatable->callbacks->getFooterCallback()['template'], $datatable->callbacks->getFooterCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->formatNumber)
-    "formatNumber": @include($datatable->callbacks->formatNumber['template'], $datatable->callbacks->formatNumber['vars'] ?? []),
+@if($datatable->callbacks->getFormatNumber())
+    "formatNumber": @include($datatable->callbacks->getFormatNumber()['template'], $datatable->callbacks->getFormatNumber()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->headerCallback)
-    "headerCallback": @include($datatable->callbacks->headerCallback['template'], $datatable->callbacks->headerCallback['vars'] ?? []),
+@if($datatable->callbacks->getHeaderCallback())
+    "headerCallback": @include($datatable->callbacks->getHeaderCallback()['template'], $datatable->callbacks->getHeaderCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->infoCallback)
-    "infoCallback": @include($datatable->callbacks->infoCallback['template'], $datatable->callbacks->infoCallback['vars'] ?? []),
+@if($datatable->callbacks->getInfoCallback())
+    "infoCallback": @include($datatable->callbacks->getInfoCallback()['template'], $datatable->callbacks->getInfoCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->initComplete)
-    "initComplete": @include($datatable->callbacks->initComplete['template'], $datatable->callbacks->initComplete['vars'] ?? []),
+@if($datatable->callbacks->getInitComplete())
+    "initComplete": @include($datatable->callbacks->getInitComplete()['template'], $datatable->callbacks->getInitComplete()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->preDrawCallback)
-    "preDrawCallback": @include($datatable->callbacks->preDrawCallback['template'], $datatable->callbacks->preDrawCallback['vars'] ?? []),
+@if($datatable->callbacks->getPreDrawCallback())
+    "preDrawCallback": @include($datatable->callbacks->getPreDrawCallback()['template'], $datatable->callbacks->getPreDrawCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->rowCallback)
-    "rowCallback": @include($datatable->callbacks->rowCallback['template'], $datatable->callbacks->rowCallback['vars'] ?? []),
+@if($datatable->callbacks->getRowCallback())
+    "rowCallback": @include($datatable->callbacks->getRowCallback()['template'], $datatable->callbacks->getRowCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->stateLoadCallback)
-    "stateLoadCallback": @include($datatable->callbacks->stateLoadCallback['template'], $datatable->callbacks->stateLoadCallback['vars'] ?? []),
+@if($datatable->callbacks->getStateLoadCallback())
+    "stateLoadCallback": @include($datatable->callbacks->getStateLoadCallback()['template'], $datatable->callbacks->getStateLoadCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->stateLoaded)
-    "stateLoaded": @include($datatable->callbacks->stateLoaded['template'], $datatable->callbacks->stateLoaded['vars'] ?? []),
+@if($datatable->callbacks->getStateLoaded())
+    "stateLoaded": @include($datatable->callbacks->getStateLoaded()['template'], $datatable->callbacks->getStateLoaded()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->stateLoadParams)
-    "stateLoadParams": @include($datatable->callbacks->stateLoadParams['template'], $datatable->callbacks->stateLoadParams['vars'] ?? []),
+@if($datatable->callbacks->getStateLoadParams())
+    "stateLoadParams": @include($datatable->callbacks->getStateLoadParams()['template'], $datatable->callbacks->getStateLoadParams()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->stateSaveCallback)
-    "stateSaveCallback": @include($datatable->callbacks->stateSaveCallback['template'], $datatable->callbacks->stateSaveCallback['vars'] ?? []),
+@if($datatable->callbacks->getStateSaveCallback())
+    "stateSaveCallback": @include($datatable->callbacks->getStateSaveCallback()['template'], $datatable->callbacks->getStateSaveCallback()['vars'] ?? []),
 @endif
 
-@if($datatable->callbacks->stateSaveParams)
-    "stateSaveParams": @include($datatable->callbacks->stateSaveParams['template'], $datatable->callbacks->stateSaveParams['vars'] ?? []),
+@if($datatable->callbacks->getStateSaveParams())
+    "stateSaveParams": @include($datatable->callbacks->getStateSaveParams()['template'], $datatable->callbacks->getStateSaveParams()['vars'] ?? []),
 @endif
 

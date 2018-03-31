@@ -65,10 +65,10 @@
 
                 oTable = $(selector)
                     .DataTable(defaults)
-                    .on('draw.dt', function() { postCreateDatatable({{ $datatable->ajax->pipeline}}) })
+                    .on('draw.dt', function() { postCreateDatatable({{ $datatable->ajax->getPipeline() }}) })
                 ;
 
-                @if($datatable->options->individualFiltering)
+                @if($datatable->options->isIndividualFiltering())
                 @include('datatables::datatable.search')
                 @endif
             }
@@ -77,7 +77,7 @@
         createDatatable();
 
         @if($datatable->columnBuilder->getUniqueColumn('multiselect'))
-        {{ $sg_datatables_render_multiselect_actions( $datatable->columnBuilder->getUniqueColumn('multiselect'), $datatable->ajax->pipeline) }}
+        {{ $sg_datatables_render_multiselect_actions( $datatable->columnBuilder->getUniqueColumn('multiselect'), $datatable->ajax->getPipeline()) }}
         @endif
     });
 

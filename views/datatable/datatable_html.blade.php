@@ -1,12 +1,12 @@
 @php $individual_filtering = false @endphp
 
-@if ($datatable->options->individualFiltering)
+@if ($datatable->options->isIndividualFiltering())
     @if ($datatable->features->searching || is_null($datatable->features->searching))
         @php $individual_filtering = true @endphp
     @endif
 @endif
 
-<table id="sg-datatables-{{ $datatable->name }}" class="{{ $datatable->options->classes }}" cellspacing="0" width="100%">
+<table id="sg-datatables-{{ $datatable->name }}" class="{{ $datatable->options->getCLasses() }}" cellspacing="0" width="100%">
     <thead>
     @if ($individual_filtering)
         @if ($datatable->options->individualFilteringPosition == 'head' || $datatable->options->individualFilteringPosition == 'both')

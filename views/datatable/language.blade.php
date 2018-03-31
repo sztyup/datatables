@@ -1,11 +1,11 @@
-@if ($datatable->language->language == null)
-    @if ($datatable->language->cdnLanguageByLocale)
+@if ($datatable->language->getLanguage() == null)
+    @if ($datatable->language->isCdnLanguageByLocale())
         "language": {
-            "url": "{{ $datatable->language->languageCDNFile[$locale] }}"
+        "url": "/datatables/language"
         }
     @endif
 
-    @if ($datatable->language->languageByLocale)
+    @if ($datatable->language->isLanguageByLocale())
         "language": @include('datatable.i18n.' . $locale)
     @endif
 @else

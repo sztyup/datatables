@@ -1,59 +1,59 @@
-@if($datatable->events->columnSizing)
-    .on('column-sizing.dt', @include($datatable->callback->columnSizing['template'], $datatable->events->columnSizing['vars'] ?? []))
+@if($datatable->events->getColumnSizing())
+    .on('column-sizing.dt', @include($datatable->callback->getColumnSizing()['template'], $datatable->events->getColumnSizing()['vars'] ?? []))
 @endif
 
-@if($datatable->events->columnVisibility)
-    .on('column-visibility.dt', @include($datatable->callback->columnVisibility['template'], $datatable->events->columnVisibility['vars'] ?? []))
+@if($datatable->events->getColumnVisibility())
+    .on('column-visibility.dt', @include($datatable->callback->getColumnVisibility()['template'], $datatable->events->getColumnVisibility()['vars'] ?? []))
 @endif
 
-@if($datatable->events->destroy)
-    .on('destroy.dt', @include($datatable->callback->destroy['template'], $datatable->events->destroy['vars'] ?? []))
+@if($datatable->events->getDestroy())
+    .on('destroy.dt', @include($datatable->callback->getDestroy()['template'], $datatable->events->getDestroy()['vars'] ?? []))
 @endif
 
-@if($datatable->events->error)
-    .on('error.dt', @include($datatable->callback->error['template'], $datatable->events->error['vars'] ?? []))
+@if($datatable->events->getError())
+    .on('error.dt', @include($datatable->callback->getError()['template'], $datatable->events->getError()['vars'] ?? []))
 @endif
 
-@if($datatable->events->length)
-    .on('length.dt', @include($datatable->callback->length['template'], $datatable->events->length['vars'] ?? []))
+@if($datatable->events->getLength())
+    .on('length.dt', @include($datatable->callback->getLength()['template'], $datatable->events->getLength()['vars'] ?? []))
 @endif
 
-@if($datatable->events->order)
-    .on('order.dt', @include($datatable->callback->order['template'], $datatable->events->order['vars'] ?? []))
+@if($datatable->events->getOrder())
+    .on('order.dt', @include($datatable->callback->getOrder()['template'], $datatable->events->getOrder()['vars'] ?? []))
 @endif
 
-@if($datatable->events->page)
-    .on('page.dt', @include($datatable->callback->page['template'], $datatable->events->page['vars'] ?? []))
+@if($datatable->events->getPage())
+    .on('page.dt', @include($datatable->callback->getPage()['template'], $datatable->events->getPage()['vars'] ?? []))
 @endif
 
-@if($datatable->events->preInit)
-    .on('preInit.dt', @include($datatable->callback->preInit['template'], $datatable->events->preInit['vars'] ?? []))
+@if($datatable->events->getPreInit())
+    .on('preInit.dt', @include($datatable->callback->getPreInit()['template'], $datatable->events->getPreInit()['vars'] ?? []))
 @endif
 
-@if($datatable->events->processing)
-    .on('processing.dt', @include($datatable->callback->processing['template'], $datatable->events->processing['vars'] ?? []))
+@if($datatable->events->getProcessing())
+    .on('processing.dt', @include($datatable->callback->getProcessing()['template'], $datatable->events->getProcessing()['vars'] ?? []))
 @endif
 
-@if($datatable->events->search)
-    .on('search.dt', @include($datatable->callback->search['template'], $datatable->events->search['vars'] ?? []))
+@if($datatable->events->getSearch())
+    .on('search.dt', @include($datatable->callback->getSearch()['template'], $datatable->events->getSearch()['vars'] ?? []))
 @endif
 
-@if($datatable->events->page)
-    .on('page.dt', @include($datatable->callback->page['template'], $datatable->events->page['vars'] ?? []))
+@if($datatable->events->getPage())
+    .on('page.dt', @include($datatable->callback->getPage()['template'], $datatable->events->getPage()['vars'] ?? []))
 @endif
 
-@if($datatable->events->stateLoaded)
-    .on('stateLoaded.dt', @include($datatable->callback->stateLoaded['template'], $datatable->events->stateLoaded['vars'] ?? []))
+@if($datatable->events->getStateLoaded())
+    .on('stateLoaded.dt', @include($datatable->callback->getStateLoaded()['template'], $datatable->events->getStateLoaded()['vars'] ?? []))
 @endif
 
-@if($datatable->events->stateLoadParams)
-    .on('stateLoadedParams.dt', @include($datatable->callback->stateLoadParams['template'], $datatable->events->stateLoadParams['vars'] ?? []))
+@if($datatable->events->getStateLoadParams())
+    .on('stateLoadedParams.dt', @include($datatable->callback->getStateLoadParams()['template'], $datatable->events->getStateLoadParams()['vars'] ?? []))
 @endif
 
-@if($datatable->events->stateSaveParams)
-    .on('stateSaveParams.dt', @include($datatable->callback->stateSaveParams['template'], $datatable->events->stateSaveParams['vars'] ?? []))
+@if($datatable->events->getStateSaveParams())
+    .on('stateSaveParams.dt', @include($datatable->callback->getStateSaveParams()['template'], $datatable->events->getStateSaveParams()['vars'] ?? []))
 @endif
 
-@if($datatable->events->xhr)
-    .on('xhr.dt', @include($datatable->callback->xhr['template'], $datatable->events->xhr['vars'] ?? []))
+@if($datatable->events->getXhr())
+    .on('xhr.dt', @include($datatable->callback->getXhr()['template'], $datatable->events->getXhr()['vars'] ?? []))
 @endif

@@ -1,54 +1,50 @@
 {
-    @section('common')
-        @if ($column->cellType)
-            "cellType": "{{ $column->cellType }}",
-        @endif
-        @if ($column->contentPadding)
-            "contentPadding": "{{ $column->contentPadding }}",
-        @endif
-        @if ($column->defaultContent)
-            "defaultContent": "{{ $column->defaultContent }}",
-        @endif
-        @if ($column->name)
-            "name": "{{ $column->name }}",
-        @endif
-        @if ($column->width)
-            "width": "{{ $column->width }}",
-        @endif
-        @if ($column->title)
-            "title": "{!! $column->title !!}",
-        @endif
-        @if ($column->searchable == true || $column->searchable == false)
-            "searchable": {{ $column->searchable }},
-        @endif
-        @if ($column->visible == true)
-            "visible": true,
-            @if ($column->className)
-                "className": "{{ $column->className }}",
-            @endif
-        @endif
-        @if ($column->visible == false)
-            "visible": false,
-            "className": "never @if ($column->className){{ $column->className }}@endif",
-        @endif
-        @if ($column->orderable == false)
-            "orderable": true,
-            @if ($column->orderSequence)
-                "orderSequence": {!! $column->orderSequence !!},
-            @endif
-            @if ($column->orderData)
-                "orderData": {{ $column->orderData }},
-            @endif
-        @endif
-        @if ($column->orderable == false)
-            "orderable": false,
-        @endif
-        @if ($column->responsivePriority)
-            "responsivePriority": {{ $column->responsivePriority }},
-        @endif
-    @endsection
+@if ($column->getCellType())
+    "cellType": "{{ $column->getCellType() }}",
+@endif
+@if ($column->getContentPadding())
+    "contentPadding": "{{ $column->getContentPadding() }}",
+@endif
+@if ($column->getDefaultContent())
+    "defaultContent": "{{ $column->getDefaultContent() }}",
+@endif
+@if ($column->getName())
+    "name": "{{ $column->getName() }}",
+@endif
+@if ($column->getWidth())
+    "width": "{{ $column->getWidth() }}",
+@endif
+@if ($column->getTitle())
+    "title": "{!! $column->getTitle() !!}",
+@endif
+@if ($column->getSearchable() == true || $column->getSearchable() == false)
+    "searchable": {{ $column->getSearchable() }},
+@endif
+@if ($column->getVisible() == true)
+    "visible": true,
+    @if ($column->getClassName())
+        "className": "{{ $column->getClassName() }}",
+    @endif
+@endif
+@if ($column->getVisible() == false)
+    "visible": false,
+    "className": "never @if ($column->getClassName()){{ $column->getClassName() }}@endif",
+@endif
+@if ($column->getOrderable() == false)
+    "orderable": true,
+    @if ($column->getOrderSequence())
+        "orderSequence": {!! $column->getOrderSequence() !!},
+    @endif
+    @if ($column->getOrderData())
+        "orderData": {{ $column->getOrderData() }},
+    @endif
+@endif
+@if ($column->getOrderable() == false)
+    "orderable": false,
+@endif
+@if ($column->getResponsivePriority())
+    "responsivePriority": {{ $column->getResponsivePriority() }},
+@endif
 
-    @section('data')
-        "data": "{{ $column->data }}",
-    @endsection
+"data": "{{ $column->getData() }}",
 },

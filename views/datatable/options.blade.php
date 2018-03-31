@@ -1,54 +1,54 @@
-@if ($datatable->options->deferLoading)
-    "deferLoading": {{ $datatable->options->deferLoading }},
+@if ($datatable->options->getDeferLoading())
+    "deferLoading": {{ $datatable->options->getDeferLoading() }},
 @endif
-@if ($datatable->options->displayStart)
-    "displayStart": {{ $datatable->options->displayStart }},
+@if ($datatable->options->getDisplayStart())
+    "displayStart": {{ $datatable->options->getDisplayStart() }},
 @endif
-@if ($datatable->options->dom)
-    "dom": "{!! $datatable->options->dom !!}",
+@if ($datatable->options->getDom())
+    "dom": "{!! $datatable->options->getDom() !!}",
 @endif
-@if ($datatable->options->lengthMenu)
-    "lengthMenu": {!! $datatable->options->lengthMenu !!},
+@if ($datatable->options->getLengthMenu())
+    "lengthMenu": {!! $datatable->options->getLengthMenu() !!},
 @endif
-@if ($datatable->options->order)
-    "order": {!! $datatable->options->order !!},
+@if ($datatable->options->getOrder())
+    "order": {!! $datatable->options->getOrder() !!},
 @endif
-@if ($datatable->options->orderCellsTop)
-    "orderCellsTop": {{ $datatable->options->orderCellsTop }},
+@if ($datatable->options->isOrderCellsTop())
+    "orderCellsTop": {{ $datatable->options->isOrderCellsTop() }},
 @endif
-@if ($datatable->options->orderClasses)
-    "orderClasses": {{ $datatable->options->orderClasses }},
+@if ($datatable->options->isOrderClasses())
+    "orderClasses": {{ $datatable->options->isOrderClasses() }},
 @endif
-@if ($datatable->options->orderFixed)
-    "orderFixed": {!! $datatable->options->orderFixed !!},
+@if ($datatable->options->getOrderFixed())
+    "orderFixed": {!! $datatable->options->getOrderFixed() !!},
 @endif
-@if ($datatable->options->orderMulti)
-    "orderMulti": {{ $datatable->options->orderMulti }},
+@if ($datatable->options->isOrderMulti())
+    "orderMulti": {{ $datatable->options->isOrderMulti() }},
 @endif
-@if ($datatable->options->pageLength)
-    "pageLength": {{ $datatable->options->pageLength }},
+@if ($datatable->options->getPageLength())
+    "pageLength": {{ $datatable->options->getPageLength() }},
 @endif
-@if ($datatable->options->pagingType)
-    "pagingType": "{{ $datatable->options->pagingType }}",
+@if ($datatable->options->getPagingType())
+    "pagingType": "{{ $datatable->options->getPagingType() }}",
 @endif
-@if ($datatable->options->renderer)
-    "renderer": "{{ $datatable->options->renderer }}",
+@if ($datatable->options->getRenderer())
+    "renderer": "{{ $datatable->options->getRenderer() }}",
 @endif
-@if ($datatable->options->retrieve)
-    "retrieve": {{ $datatable->options->retrieve }},
+@if ($datatable->options->isRetrieve())
+    "retrieve": {{ $datatable->options->isRetrieve() }},
 @endif
-@if ($datatable->options->rowId)
-    "rowId": "{{ $datatable->options->rowId }}",
+@if ($datatable->options->getRowId())
+    "rowId": "{{ $datatable->options->getRowId() }}",
 @endif
-@if ($datatable->options->scrollCollapse)
-    "scrollCollapse": {{ $datatable->options->scrollCollapse }},
+@if ($datatable->options->isScrollCollapse())
+    "scrollCollapse": {{ $datatable->options->isScrollCollapse() }},
 @endif
-@if ($datatable->options->searchDelay)
-    "searchDelay": {{ $datatable->options->searchDelay }},
+@if ($datatable->options->getSearchDelay())
+    "searchDelay": {{ $datatable->options->getSearchDelay() }},
 @endif
-@if ($datatable->options->stateDuration)
-    "stateDuration": {{ $datatable->options->stateDuration }},
+@if ($datatable->options->getStateDuration())
+    "stateDuration": {{ $datatable->options->getStateDuration() }},
 @endif
-@if ($datatable->options->stripeClasses)
-    "stripeClasses": {!! $datatable->options->stripeClasses !!},
+@if ($datatable->options->getStripeClasses())
+    "stripeClasses": {!! $datatable->options->getStripeClasses() !!},
 @endif

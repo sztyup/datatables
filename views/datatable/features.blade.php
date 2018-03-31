@@ -1,33 +1,33 @@
-@if ($datatable->features->autoWidth)
-    "autoWidth": {{ $datatable->features->autoWidth }},
+@if ($datatable->features->getAutoWidth())
+    "autoWidth": {{ $datatable->features->getAutoWidth() }},
 @endif
-@if ($datatable->features->deferRender)
-    "deferRender": {{ $datatable->features->deferRender }},
+@if ($datatable->features->getDeferRender())
+    "deferRender": {{ $datatable->features->getDeferRender() }},
 @endif
-@if ($datatable->features->info)
-    "info": {{ $datatable->features->info }},
+@if ($datatable->features->getInfo())
+    "info": {{ $datatable->features->getInfo() }},
 @endif
-@if ($datatable->features->lengthChange)
-    "lengthChange": {{ $datatable->features->lengthChange }},
+@if ($datatable->features->getLengthChange())
+    "lengthChange": {{ $datatable->features->getLengthChange() }},
 @endif
-@if ($datatable->features->ordering)
-    "ordering": {{ $datatable->features->ordering }},
+@if ($datatable->features->getOrdering())
+    "ordering": {{ $datatable->features->getOrdering() }},
 @endif
-@if ($datatable->features->paging)
-    "paging": {{ $datatable->features->paging }},
+@if ($datatable->features->getPaging())
+    "paging": {{ $datatable->features->getPaging() }},
 @endif
-@if ($datatable->features->processing)
-    "processing": {{ $datatable->features->processing }},
+@if ($datatable->features->getProcessing())
+    "processing": {{ $datatable->features->getProcessing() }},
 @endif
-@if ($datatable->features->scrollX)
-    "scrollX": {{ $datatable->features->scrollX }},
+@if ($datatable->features->getScrollX())
+    "scrollX": {{ $datatable->features->getScrollX() }},
 @endif
-@if ($datatable->features->scrollY)
-    "scrollY": "{{ $datatable->features->scrollY }}",
+@if ($datatable->features->getScrollY())
+    "scrollY": "{{ $datatable->features->getScrollY() }}",
 @endif
-@if ($datatable->features->searching)
-    "searching": {{ $datatable->features->searching }},
+@if ($datatable->features->getSearching())
+    "searching": {{ $datatable->features->getSearching() }},
 @endif
-@if ($datatable->features->stateSave)
-    "stateSave": {{ $datatable->features->stateSave }},
+@if ($datatable->features->getStateSave())
+    "stateSave": {{ $datatable->features->getStateSave() }},
 @endif
