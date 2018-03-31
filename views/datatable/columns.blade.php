@@ -1,5 +1,5 @@
 "columns": [
-    @foreach($datatable->columnBuilder->columns as $column)
+    @foreach($datatable->columnBuilder->getColumns() as $column)
         @include($column->getOptionsTemplate())
     @endforeach
 ]

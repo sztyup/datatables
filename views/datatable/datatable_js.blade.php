@@ -9,42 +9,42 @@
         };
 
         var language = {
-            @include('datatable.language')
+            @include('datatables::datatable.language')
         };
 
         var ajax = {
-            @include('datatable.ajax')
+            @include('datatables::datatable.ajax')
         };
 
         var options = {
-            @include('datatable.options')
+            @include('datatables::datatable.options')
         };
 
         var features = {
-            @include('datatable.features')
+            @include('datatables::datatable.features')
         };
 
         var callbacks = {
-            @include('datatable.callbacks')
+            @include('datatables::datatable.callbacks')
         };
 
         var extensions = {
-            @include('datatable.extensions')
+            @include('datatables::datatable.extensions')
         };
 
         var columns = {
-            @include('datatable.columns')
+            @include('datatables::datatable.columns')
         };
 
         var initialSearch = {
-            @include('datatable.initial_search')
+            @include('datatables::datatable.initial_search')
         };
 
         function postCreateDatatable(pipeline) {
-            @foreach($datatable->columnBuilder->columns as $column)
-                @if($column->renderPostCreateDatatableJsContent)
-                    {!! $column->renderPostCreateDatatableJsContent !!}
-                @endif
+            @foreach($datatable->columnBuilder->getColumns() as $column)
+            @if($column->renderPostCreateDatatableJsContent)
+            {!! $column->renderPostCreateDatatableJsContent !!}
+            @endif
             @endforeach
         }
 
@@ -60,24 +60,24 @@
 
             if (!$.fn.dataTable.isDataTable(selector)) {
                 $(selector)
-                    @include('datatable.events')
+                @include('datatables::datatable.events')
                 ;
-            
+
                 oTable = $(selector)
                     .DataTable(defaults)
-                        .on('draw.dt', function() { postCreateDatatable({{ $datatable->ajax->pipeline}}) })
-                    ;
+                    .on('draw.dt', function() { postCreateDatatable({{ $datatable->ajax->pipeline}}) })
+                ;
 
                 @if($datatable->options->individualFiltering)
-                    @include('datatable.search')
+                @include('datatables::datatable.search')
                 @endif
             }
         }
 
         createDatatable();
 
-        @if($datatable->columnBuilder->uniqueColumn('multiselect'))
-            {{ $sg_datatables_render_multiselect_actions( $datatable->columnBuilder->uniqueColumn('multiselect'), $datatable->ajax->pipeline) }}
+        @if($datatable->columnBuilder->getUniqueColumn('multiselect'))
+        {{ $sg_datatables_render_multiselect_actions( $datatable->columnBuilder->getUniqueColumn('multiselect'), $datatable->ajax->pipeline) }}
         @endif
     });
 

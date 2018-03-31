@@ -14,8 +14,8 @@
     .on('error.dt', @include($datatable->callback->error['template'], $datatable->events->error['vars'] ?? []))
 @endif
 
-@if($datatable->events->lengths)
-    .on('length.dt', @include($datatable->callback->lengths['template'], $datatable->events->lengths['vars'] ?? []))
+@if($datatable->events->length)
+    .on('length.dt', @include($datatable->callback->length['template'], $datatable->events->length['vars'] ?? []))
 @endif
 
 @if($datatable->events->order)
@@ -46,8 +46,8 @@
     .on('stateLoaded.dt', @include($datatable->callback->stateLoaded['template'], $datatable->events->stateLoaded['vars'] ?? []))
 @endif
 
-@if($datatable->events->stateLoadedParams)
-    .on('stateLoadedParams.dt', @include($datatable->callback->stateLoadedParams['template'], $datatable->events->stateLoadedParams['vars'] ?? []))
+@if($datatable->events->stateLoadParams)
+    .on('stateLoadedParams.dt', @include($datatable->callback->stateLoadParams['template'], $datatable->events->stateLoadParams['vars'] ?? []))
 @endif
 
 @if($datatable->events->stateSaveParams)
