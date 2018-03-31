@@ -151,17 +151,4 @@ trait OptionsTrait
 
         return true;
     }
-
-    public function __get($value)
-    {
-        if (method_exists($this, $method = 'get' . ucfirst(Str::camel($value)))) {
-            return $this->{$method}();
-        }
-
-        if (method_exists($this, $method = 'is' . ucfirst(Str::camel($value)))) {
-            return $this->{$method}();
-        }
-
-        throw new \InvalidArgumentException("$method does not exists");
-    }
 }
