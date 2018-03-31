@@ -18,7 +18,7 @@
     "title": "{!! $column->getTitle() !!}",
 @endif
 @if ($column->getSearchable() == true || $column->getSearchable() == false)
-    "searchable": {{ $column->getSearchable() }},
+    "searchable": {{ $column->getSearchable() ? 'true' : 'false' }},
 @endif
 @if ($column->getVisible() == true)
     "visible": true,

@@ -2,65 +2,65 @@
 
 @foreach ($actions as $actionKey => $action)
     @if ($render_if_actions[$actionKey])
-        @if($action->button == false)
-            {!! $action->startHtml !!}
+        @if($action->isButton() == false)
+            {!! $action->getStartHtml() !!}
 
             <a
-                @if ($action->route)
-                    href="@route($action->route, $route_parameters[$actionKey])"
-                @else
-                    href="javascript:void(0);"
-                @endif
-                @foreach ($attributes as $key => $value)
-                    {{ $key }}="{{ $value }}"
-                @endforeach
-                @if ($action->confirm)
-                    @if ($action->confirmMessage)
-                        onclick="return confirm('{{ $action->confirmMessage }}')"
+                    @if ($action->getRoute())
+                    href="@route($action->getRoute(), $route_parameters[$actionKey])"
                     @else
-                        onclick="return confirm('Biztos vagy benne?')"
-                    @endif
-                @endif
-            >
-            @if (is_null($action->label) && is_null($action->icon))
-                @if ($action->route)
-                    {{ $action->route }}
-                @endif
+                    href="javascript:void(0);"
+        @endif
+        @foreach ($attributes[$actionKey] as $key => $value)
+            {{ $key }}="{{ $value }}"
+        @endforeach
+        @if ($action->isConfirm())
+            @if ($action->getConfirmMessage())
+                onclick="return confirm('{{ $action->getConfirmMessage() }}')"
             @else
-                <span class="{{ $action->icon }}"></span> {{ $action->label }}
+                onclick="return confirm('Biztos vagy benne?')"
+            @endif
+        @endif
+        >
+        @if (is_null($action->getLabel()) && is_null($action->getIcon()))
+            @if ($action->getRoute())
+                {{ $action->getRoute() }}
+            @endif
+        @else
+            <span class="{{ $action->getIcon() }}"></span> {{ $action->getLabel() }}
             @endif
             </a>
-            {!! $action->endHtml !!}
-        @else
-            {!! $action->startHtml !!}
-            <button type="button"
-                @if ($value)
-                    value="{{ $value }}"
+            {!! $action->getEndHtml() !!}
+            @else
+                {!! $action->getStartHtml() !!}
+                <button type="button"
+                        @if ($value)
+                        value="{{ $value }}"
+            @endif
+            @foreach ($attributes as $key => $value)
+                {{ $key }}="{{ $value }}"
+            @endforeach
+            @if ($action->isConfirm())
+                @if ($action->getConfirmMessage())
+                    onclick="return confirm('{{ $action->getConfirmMessage() }}')"
+                @else
+                    onclick="return confirm('Biztos vagy benne?')"
                 @endif
-                @foreach ($attributes as $key => $value)
-                    {{ $key }}="{{ $value }}"
-                @endforeach
-                @if ($action->confirm)
-                    @if ($action->confirmMessage)
-                        onclick="return confirm('{{ $action->confirmMessage }}')"
-                    @else
-                        onclick="return confirm('Biztos vagy benne?')"
-                    @endif
-                @endif
+            @endif
             >
-            @if (is_null($action->label) && is_null($action->icon))
-                @if ($action->route)
-                    {{ $action->route }}
+            @if (is_null($action->getLabel()) && is_null($action->getIcon()))
+                @if ($action->getRoute())
+                    {{ $action->getRoute() }}
                 @else
                     null
                 @endif
             @else
-                    <span class="{{ $action->icon }}"></span> {{ $action->label }}
+                <i class="{{ $action->getIcon() }}"></i> {{ $action->getLabel() }}
+                @endif
+                </button>
+                {!! $action->getEndHtml() !!}
             @endif
-            </button>
-            {!! $action->endHtml !!}
         @endif
-    @endif
-@endforeach
+        @endforeach
 
-{!! $end_html_container !!}
+        {!! $end_html_container !!}
