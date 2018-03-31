@@ -31,7 +31,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sztyup\\Datatables\\DatatableServiceProvider"
+                "Sztyup\\Datatable\\DatatableServiceProvider"
             ]
         }
     }
