@@ -9,15 +9,5 @@
 @endif
 
 @if ($data)
-    <script type="text/javascript">
-        $(function() {
-            moment.locale("{{ $locale }}");
-
-            @if ($timeago == false)
-                $("#sg-datatables-{{ $datatable_name }}-datetime-{{ $row_id }}").html(moment.unix({{ $data|date('U') }}).format("{{ $date_format }}"));
-            @else
-                $("#sg-datatables-{{ $datatable_name }}-datetime-{{ $row_id }}").html(moment.unix({{ $data|date('U') }}).fromNow());
-            @endif
-        });
-    </script>
+    {{ $data->format($date_format) }}
 @endif

@@ -149,7 +149,7 @@ class DateTimeColumn extends AbstractColumn
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'date_format' => 'lll',
+            'date_format' => 'Y-m-d H:i:s',
             'timeago' => false,
             'filter' => [TextFilter::class, []],
             'editable' => null,
