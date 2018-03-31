@@ -414,7 +414,7 @@ abstract class AbstractColumn implements ColumnInterface
      */
     public function getOptionsTemplate()
     {
-        return '@SgDatatables/column/column.html.twig';
+        return 'datatables::column.column';
     }
 
     /**

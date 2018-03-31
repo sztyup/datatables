@@ -71,7 +71,7 @@ trait FilterableTrait
         }
 
         // @TODO
-        $newFilter = Factory::create($filterClassAndOptions[0], FilterInterface::class);
+        $newFilter = new $filterClassAndOptions[0];
         $this->filter = $newFilter->set($filterClassAndOptions[1]);
 
         return $this;

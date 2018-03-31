@@ -42,8 +42,8 @@
 
         function postCreateDatatable(pipeline) {
             @foreach($datatable->columnBuilder->getColumns() as $column)
-            @if($column->renderPostCreateDatatableJsContent)
-            {!! $column->renderPostCreateDatatableJsContent !!}
+            @if($column->renderPostCreateDatatableJsContent())
+            {!! $column->renderPostCreateDatatableJsContent() !!}
             @endif
             @endforeach
         }

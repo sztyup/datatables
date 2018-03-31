@@ -165,7 +165,7 @@ class ActionColumn extends AbstractColumn
      */
     public function getCellContentTemplate()
     {
-        return '@SgDatatables/render/action.html.twig';
+        return 'datatables::render.action';
     }
 
     /**
