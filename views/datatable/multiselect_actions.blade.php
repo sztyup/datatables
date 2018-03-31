@@ -1,62 +1,47 @@
-{##
- # This file is part of the SgDatatablesBundle package.
- #
- # (c) stwe <https://github.com/stwe/DatatablesBundle>
- #
- # For the full copyright and license information, please view the LICENSE
- # file that was distributed with this source code.
- #}
-{% import _self as macros %}
-
+{{-- @TODO finish this
 {% macro link_title(action) %}
-    {% if action.label is same as(null) and action.icon is same as(null) %}
-        {% if action.route is not same as(null) %}
-            {{ action.route }}
-        {% else %}
+    @if ($action->label == null && $action->icon == null)
+        @if ($action->route)
+            {{ $action->route }}
+        @else
             null
-        {% endif %}
-    {% else %}
-        <span class="{{ action.icon }}"></span> {{ action.label }}
-    {% endif %}
+        @endif
+    @else
+        <span class="{{ $action->icon }}"></span> {{ $action->label }}
+    @endif
 {% endmacro %}
 
 {% macro attributes(action) %}
-    {% for key, value in action.attributes %}
-        {{ key }}="{{ value }}"
-    {% endfor %}
+    @foreach ($action->attributes as $key => $value)
+        {{ $key }}="{{ $value }}"
+    @endforeach
 {% endmacro %}
 
 {% macro confirm_dialog(action) %}
-    {% if action.confirm is same as(true) %}
-        {% if action.confirmMessage is not same as(null) %}
-            data-message="{{ action.confirmMessage }}"
-        {% else %}
-            data-message="{{ 'sg.datatables.confirmMessage'|trans({}, 'messages') }}"
-        {% endif %}
-    {% endif %}
+    @if ($action->confirm)
+        @if ($action->confirmMessage)
+            data-message="{{ $action->confirmMessage }}"
+        @else
+            data-message="Biztos vagy benne?"
+        @endif
+    @endif
 {% endmacro %}
 
 {% macro href(action, route_parameters) %}
-    {% if action.routeParameters is not same as(null) %}
-        {% if app.request.locale is defined and app.request.locale is not null %}
-            {% if '_locale' in route_parameters|keys %}
-                {% set route_parameters = route_parameters|merge({ '_locale': app.request.locale }) %}
-            {% endif %}
-        {% endif %}
-    {% endif %}
-
-    {% if action.route is not same as(null) %}
-        href="{{ path(action.route, route_parameters) }}"
-    {% else %}
+    @if ($action->route)
+        href="@route($action->route,  $route_parameters)"
+    @else
         href="javascript:void(0);"
-    {% endif %}
+    @endif
 {% endmacro %}
 
 {% macro value(value) %}
+    @if (!is_null($value))
     {% if value is not null %}
         value="{{ value }}"
-    {% endif %}
+    @endif
 {% endmacro %}
+
 
 {% set multiselect_actions %}
     {% for actionKey, action in actions %}
@@ -77,19 +62,19 @@
         {% endif %}
     {% endfor %}
 {% endset %}
+--}}
 
-{# add multiselect actions #}
-{% if dom_id is null %}
-    $("#sg-datatables-{{ datatable_name }}-multiselect-actions").append("{{ multiselect_actions|e('js') }}");
-{% else %}
-    $("#{{ dom_id }}").append("{{ multiselect_actions|e('js') }}");
-{% endif %}
+@if (is_null($dom_id))
+    $("#sg-datatables-{{ $datatable_name }}-multiselect-actions").append("{!! $multiselect_actions !!}");
+@else
+    $("#{{ $dom_id }}").append("{!! $multiselect_actions !!}");
+@endif
 
 {# function to update the check-all-checkbox #}
 function updateCheckAll() {
-    var cbox_all = $("#sg-datatables-{{ datatable_name }} tbody input.sg-datatables-{{ datatable_name }}-multiselect-checkbox:checkbox");
-    var cbox_checked = $("#sg-datatables-{{ datatable_name }} tbody input.sg-datatables-{{ datatable_name }}-multiselect-checkbox:checkbox:checked");
-    var cbox_checkall = $("#sg-datatables-{{ datatable_name }} input.sg-datatables-{{ datatable_name }}-multiselect-checkall:checkbox");
+    var cbox_all = $("#sg-datatables-{{ $datatable_name }} tbody input.sg-datatables-{{ $datatable_name }}-multiselect-checkbox:checkbox");
+    var cbox_checked = $("#sg-datatables-{{ $datatable_name }} tbody input.sg-datatables-{{ $datatable_name }}-multiselect-checkbox:checkbox:checked");
+    var cbox_checkall = $("#sg-datatables-{{ $datatable_name }} input.sg-datatables-{{ $datatable_name }}-multiselect-checkall:checkbox");
 
     if(cbox_checked.length === 0){
         cbox_checkall.prop('checked', false);
@@ -104,14 +89,14 @@ function updateCheckAll() {
 }
 
 {# handle row <tr> click #}
-$("#sg-datatables-{{ datatable_name }} tbody").on("click", "tr", function () {
+$("#sg-datatables-{{ $datatable_name }} tbody").on("click", "tr", function () {
     {# add 'selected' class #}
     if ($(this).find("input").length) {
         $(this).toggleClass("selected");
     }
 
     {# set !checked for the row checkbox #}
-    $(this).find("input.sg-datatables-{{ datatable_name }}-multiselect-checkbox:checkbox").each(function() {
+    $(this).find("input.sg-datatables-{{ $datatable_name }}-multiselect-checkbox:checkbox").each(function() {
         this.checked = !this.checked;
     });
 
@@ -119,16 +104,16 @@ $("#sg-datatables-{{ datatable_name }} tbody").on("click", "tr", function () {
 });
 
 {# handle checkbox <input> click #}
-$("#sg-datatables-{{ datatable_name }} tbody").on("click", "input.sg-datatables-{{ datatable_name }}-multiselect-checkbox:checkbox", function () {
+$("#sg-datatables-{{ $datatable_name }} tbody").on("click", "input.sg-datatables-{{ $datatable_name }}-multiselect-checkbox:checkbox", function () {
     this.checked = !this.checked;
     updateCheckAll();
 });
 
 {# select/unselect all checkboxes #}
-$("#sg-datatables-{{ datatable_name }}").on("click", "input.sg-datatables-{{ datatable_name }}-multiselect-checkall:checkbox", function () {
-    $("input.sg-datatables-{{ datatable_name }}-multiselect-checkbox").prop('checked', $(this).prop("checked"));
+$("#sg-datatables-{{ $datatable_name }}").on("click", "input.sg-datatables-{{ $datatable_name }}-multiselect-checkall:checkbox", function () {
+    $("input.sg-datatables-{{ $datatable_name }}-multiselect-checkbox").prop('checked', $(this).prop("checked"));
     var propCheck = $(this).prop("checked");
-    $("#sg-datatables-{{ datatable_name }} tbody tr").each(function(){
+    $("#sg-datatables-{{ $datatable_name }} tbody tr").each(function(){
         if ($(this).find("input").length) {
             if (true == propCheck) {
                 $(this).addClass("selected");
@@ -140,7 +125,7 @@ $("#sg-datatables-{{ datatable_name }}").on("click", "input.sg-datatables-{{ dat
 });
 
 {# handle multiselect action click #}
-$(".sg-datatables-{{ datatable_name }}-multiselect-action").on("click", function(event) {
+$(".sg-datatables-{{ $datatable_name }}-multiselect-action").on("click", function(event) {
     event.preventDefault();
 
     if (oTable.rows(".selected").data().length > 0) {
@@ -154,7 +139,7 @@ $(".sg-datatables-{{ datatable_name }}-multiselect-action").on("click", function
             return i
         });
 
-        var pipeline = {{ pipeline }};
+        var pipeline = {{ $pipeline }};
 
         {% set token = csrf_token('multiselect') %}
 
@@ -166,7 +151,7 @@ $(".sg-datatables-{{ datatable_name }}-multiselect-action").on("click", function
                 cache: false,
                 data: {
                     'data': items,
-                    'token': "{{ token }}"
+                    'token': "{{ $token }}"
                 },
                 success: function(msg) {
                     if (pipeline > 0) {
@@ -181,6 +166,6 @@ $(".sg-datatables-{{ datatable_name }}-multiselect-action").on("click", function
             })
         }
     } else {
-        alert("{{ 'sg.datatables.selectError'|trans({}, 'messages') }}");
+        alert("Hiba történt a select közben");
     }
 });
