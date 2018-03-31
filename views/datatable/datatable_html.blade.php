@@ -11,12 +11,12 @@
     @if ($individual_filtering)
         @if ($datatable->options->individualFilteringPosition == 'head' || $datatable->options->individualFilteringPosition == 'both')
             <tr>
-                @foreach ($datatable->columnBuilder->columns as $column)
+                @foreach ($datatable->columnBuilder->getColumns() as $column)
                     <th>{{ $column->title }}</th>
                 @endforeach
             </tr>
             <tr id="sg-datatables-{{ $datatable->name }}-filterrow">
-                @foreach ($datatable->columnBuilder->columns as $column)
+                @foreach ($datatable->columnBuilder->getColumns() as $column)
                     <th>
                         @if ($column->searchable)
                             {{ sg_datatables_render_filter(datatable, column, 'head') }}
@@ -31,7 +31,7 @@
         @if ($datatable->options->individualFilteringPosition == 'foot' || $datatable->options->individualFilteringPosition == 'both')
             <tfoot>
             <tr>
-                @foreach ($datatable->columnBuilder->columns as $column)
+                @foreach ($datatable->columnBuilder->getColumns() as $column)
                     <td>
                         @if ($column->searchable)
                             {{ sg_datatables_render_filter(datatable, column, 'foot') }}

@@ -112,7 +112,7 @@ class DateTimeColumn extends AbstractColumn
      */
     public function getCellContentTemplate()
     {
-        return '@SgDatatables/render/datetime.html.twig';
+        return 'datatables::render.datetime';
     }
 
     /**
@@ -121,7 +121,7 @@ class DateTimeColumn extends AbstractColumn
     public function renderPostCreateDatatableJsContent()
     {
         if ($this->editable instanceof EditableInterface) {
-            return $this->viewFactory->make('@SgDatatables/column/column_post_create_dt.js.twig', [
+            return $this->viewFactory->make('datatables::column.column_post_create_dt.js', [
                 'column_class_editable_selector' => $this->getColumnClassEditableSelector(),
                 'editable_options' => $this->editable,
                 'entity_class_name' => $this->getEntityClassName(),
