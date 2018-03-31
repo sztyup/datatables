@@ -11,6 +11,7 @@
 
 namespace Sztyup\Datatable;
 
+use Illuminate\Support\Str;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -149,5 +150,18 @@ trait OptionsTrait
         }
 
         return true;
+    }
+
+    public function __get($value)
+    {
+        if (method_exists($this, $method = 'get' . ucfirst(Str::camel($value)))) {
+            return $this->{$method}();
+        }
+
+        if (method_exists($this, $method = 'is' . ucfirst(Str::camel($value)))) {
+            return $this->{$method}();
+        }
+
+        throw new \InvalidArgumentException("$method does not exists");
     }
 }

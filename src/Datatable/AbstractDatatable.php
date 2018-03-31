@@ -14,6 +14,7 @@ namespace Sztyup\Datatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\Registrar;
+use Illuminate\Support\Str;
 use Sztyup\Datatable\Column\ColumnBuilder;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -261,5 +262,18 @@ abstract class AbstractDatatable implements DatatableInterface
         if (1 !== preg_match(self::NAME_REGEX, $this->getName())) {
             throw new Exception('The result of the getName method can only contain letters, numbers, _, -');
         }
+    }
+
+    public function __get($value)
+    {
+        if (method_exists($this, $method = 'get' . ucfirst(Str::camel($value)))) {
+            return $this->{$method}();
+        }
+
+        if (method_exists($this, $method = 'is' . ucfirst(Str::camel($value)))) {
+            return $this->{$method}();
+        }
+
+        throw new \InvalidArgumentException("$method does not exists");
     }
 }
