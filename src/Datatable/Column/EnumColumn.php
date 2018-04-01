@@ -11,6 +11,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class EnumColumn extends Column
 {
+    public function getColumnType()
+    {
+        return 'enum';
+    }
+
     protected $enums;
 
     /**
