@@ -45,6 +45,9 @@
 @if ($column->getResponsivePriority())
     "responsivePriority": {{ $column->getResponsivePriority() }},
 @endif
+@if ($column->getEnums())
+    "render": renderer,
+@endif
 
 "data": "{{ $column->getData() }}",
 },

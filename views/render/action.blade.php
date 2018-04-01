@@ -37,7 +37,7 @@
                         @if ($value)
                         value="{{ $value }}"
             @endif
-            @foreach ($attributes as $key => $value)
+            @foreach ($attributes[$actionKey] as $key => $value)
                 {{ $key }}="{{ $value }}"
             @endforeach
             @if ($action->isConfirm())
@@ -55,7 +55,7 @@
                     null
                 @endif
             @else
-                <i class="{{ $action->getIcon() }}"></i> {{ $action->getLabel() }}
+                <span class="{{ $action->getIcon() }}"></span> {{ $action->getLabel() }}
                 @endif
                 </button>
                 {!! $action->getEndHtml() !!}

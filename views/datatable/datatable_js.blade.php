@@ -2,6 +2,12 @@
 
     $(document).ready(function () {
 
+        var enums = {
+            @include('datatables::datatable.enums')
+        };
+
+        @include('datatables::datatable.enum_renderer.js')
+
         var selector = "#sg-datatables-{{ $datatable->name }}";
         var oTable;
 
