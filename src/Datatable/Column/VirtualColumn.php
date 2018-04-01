@@ -171,4 +171,23 @@ class VirtualColumn extends Column
 
         return $this;
     }
+
+    /**
+     * @return \Closure|null
+     */
+    public function getCalc()
+    {
+        return $this->calc;
+    }
+
+    /**
+     * @param \Closure|null $calc
+     * @return VirtualColumn
+     */
+    public function setCalc($calc)
+    {
+        $this->calc = $calc;
+
+        return $this;
+    }
 }
