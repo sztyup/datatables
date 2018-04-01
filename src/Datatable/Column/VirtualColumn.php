@@ -36,6 +36,13 @@ class VirtualColumn extends Column
      */
     protected $searchColumn;
 
+    /**
+     * The function to calculate cell content
+     *
+     * @var null|\Closure
+     */
+    protected $calc;
+
     //-------------------------------------------------
     // Options
     //-------------------------------------------------
@@ -60,10 +67,12 @@ class VirtualColumn extends Column
             'searchable' => false,
             'order_column' => null,
             'search_column' => null,
+            'calc' => null
         ]);
 
         $resolver->setAllowedTypes('order_column', ['null', 'string']);
         $resolver->setAllowedTypes('search_column', ['null', 'string']);
+        $resolver->setAllowedTypes('calc', ['null', 'Closure']);
 
         $resolver->setNormalizer('orderable', function (Options $options, $value) {
             if (null === $options['order_column'] && true === $value) {
@@ -87,6 +96,13 @@ class VirtualColumn extends Column
     //-------------------------------------------------
     // ColumnInterface
     //-------------------------------------------------
+
+    public function renderSingleField(array &$row)
+    {
+        $row[$this->getName()] = call_user_func_array($this->calc, func_get_args());
+
+        return $row;
+    }
 
     /**
      * {@inheritdoc}
