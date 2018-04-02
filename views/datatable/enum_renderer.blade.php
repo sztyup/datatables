@@ -5,7 +5,7 @@ var enums = {
         @foreach ($column->getEnums() as $key => $value)
             {{ $key }}: "{{ $value }}",
         @endforeach
-        }
+        },
     @endif
 @endforeach
 };
