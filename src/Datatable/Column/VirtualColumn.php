@@ -99,7 +99,7 @@ class VirtualColumn extends Column
 
     public function renderSingleField(array &$row)
     {
-        $row[$this->getName()] = call_user_func_array($this->calc, func_get_args());
+        $row[$this->getName()] = call_user_func_array($this->getCalc(), func_get_args());
 
         return $row;
     }
