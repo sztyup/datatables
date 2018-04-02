@@ -12,6 +12,7 @@
 namespace Sztyup\Datatable;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Illuminate\Support\Str;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Sztyup\Datatable\Column\ColumnInterface;
@@ -77,13 +78,10 @@ class DatatableFormatter
 
             // Format custom DQL fields output ('custom.dql.name' => $row['custom']['dql']['name'] = 'value')
             foreach ($columns as $column) {
-                /** @noinspection PhpUndefinedMethodInspection */
                 if (true === $column->isCustomDql()) {
-                    /** @noinspection PhpUndefinedMethodInspection */
                     $columnAlias = str_replace('.', '_', $column->getData());
-                    /** @noinspection PhpUndefinedMethodInspection */
                     $columnPath = '['.str_replace('.', '][', $column->getData()).']';
-                    /** @noinspection PhpUndefinedMethodInspection */
+
                     if ($columnAlias !== $column->getData()) {
                         $this->accessor->setValue($row, $columnPath, $row[$columnAlias]);
                         unset($row[$columnAlias]);
@@ -93,9 +91,7 @@ class DatatableFormatter
 
             // 1. Set (if necessary) the custom data source for the Columns with a 'data' option
             foreach ($columns as $column) {
-                /** @noinspection PhpUndefinedMethodInspection */
                 $dql = $column->getDql();
-                /** @noinspection PhpUndefinedMethodInspection */
                 $data = $column->getData();
 
                 /** @noinspection PhpUndefinedMethodInspection */
@@ -112,6 +108,8 @@ class DatatableFormatter
                 $row = call_user_func($datatable->getLineFormatter(), $row);
             }
 
+            $row = $this->formatIfEmbeddable($row);
+
             /** @var ColumnInterface $column */
             foreach ($columns as $column) {
                 // 3. Add some special data to the output array. For example, the visibility of actions.
@@ -122,6 +120,28 @@ class DatatableFormatter
 
             $this->output['data'][] = $row;
         }
+    }
+
+    protected function formatIfEmbeddable($column)
+    {
+        foreach ($column as $key => $item) {
+            if (is_array($item)) {
+                $column[$key] = $this->formatIfEmbeddable($item);
+            } else {
+                if (Str::contains($key, '.')) {
+                    $parent = Str::before($key, '.');
+                    if (!isset($column[$parent])) {
+                        $column[$parent] = [];
+                    }
+
+                    $column[$parent][Str::after($key, '.')] = $item;
+
+                    unset($column[$key]);
+                }
+            }
+        }
+
+        return $column;
     }
 
     //-------------------------------------------------
