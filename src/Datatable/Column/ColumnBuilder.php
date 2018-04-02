@@ -168,7 +168,7 @@ class ColumnBuilder
     /**
      * Get columns.
      *
-     * @return array
+     * @return array|AbstractColumn[]
      */
     public function getColumns()
     {
