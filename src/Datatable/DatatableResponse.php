@@ -92,7 +92,6 @@ class DatatableResponse
         };
 
         $this->datatable = $datatable;
-        $this->datatableQueryBuilder = $this->createDatatableQueryBuilder();
 
         return $this;
     }
@@ -115,6 +114,8 @@ class DatatableResponse
         }
 
         $this->setDatatable($this->datatable);
+
+        $this->createDatatableQueryBuilder();
 
         if (null === $this->datatableQueryBuilder) {
             throw new Exception('A DatatableQueryBuilder instance is needed. Call getDatatableQueryBuilder().');
