@@ -12,9 +12,9 @@
 namespace Sztyup\Datatable;
 
 use Doctrine\DBAL\DBALException;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManagerInterface;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -267,11 +267,23 @@ class DatatableQueryBuilder
                     }
 
                     $metadata = $this->setIdentifierFromAssociation($currentAlias, $currentPart, $metadata);
+
+                    if (array_key_exists($parts[0], $metadata->embeddedClasses)) {
+                        $embedded = $this->getMetadata($metadata->embeddedClasses[$parts[0]]['class']);
+
+                        foreach ($embedded->getFieldNames() as $field) {
+                            $this->addSelectColumn($currentAlias, $parts[0] . '.' . $field);
+                            $this->addSearchOrderColumn($column, $currentAlias, $parts[0] . '.' . $field);
+                        }
+                    }
                 }
 
                 $this->addSelectColumn($currentAlias, $this->getIdentifier($metadata));
-                $this->addSelectColumn($currentAlias, $parts[0]);
-                $this->addSearchOrderColumn($column, $currentAlias, $parts[0]);
+
+                if (!isset($embedded)) {
+                    $this->addSelectColumn($currentAlias, $parts[0]);
+                    $this->addSearchOrderColumn($column, $currentAlias, $parts[0]);
+                }
             } else {
                 // Add Order-Field for VirtualColumn
                 if ($this->accessor->isReadable($column, 'orderColumn') &&
@@ -309,18 +321,6 @@ class DatatableQueryBuilder
     //-------------------------------------------------
     // Public
     //-------------------------------------------------
-
-    /**
-     * Build query.
-     *
-     * @deprecated No longer used by internal code.
-     *
-     * @return $this
-     */
-    public function buildQuery()
-    {
-        return $this;
-    }
 
     /**
      * Get qb.
