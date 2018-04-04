@@ -45,7 +45,9 @@
 @if ($column->getResponsivePriority())
     "responsivePriority": {{ $column->getResponsivePriority() }},
 @endif
-@if($column->getColumnType() == 'enum' && count($column->getEnums()) > 0)
+@if ($column->getRenderer())
+    "render": {{ $column->getRenderer() }},
+@elseif($column->getColumnType() == 'enum' && count($column->getEnums()) > 0)
     "render": renderer,
 @endif
 
