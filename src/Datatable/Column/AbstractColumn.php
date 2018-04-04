@@ -282,6 +282,11 @@ abstract class AbstractColumn implements ColumnInterface
      */
     protected $originalTypeOfField;
 
+    /**
+     * @var null|string
+     */
+    protected $renderer;
+
     /** @var Factory */
     protected $viewFactory;
 
@@ -1050,6 +1055,25 @@ abstract class AbstractColumn implements ColumnInterface
     public function setOriginalTypeOfField($originalTypeOfField)
     {
         $this->originalTypeOfField = $originalTypeOfField;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
+     * @param $renderer string
+     * @return static
+     */
+    public function setRenderer($renderer)
+    {
+        $this->renderer = $renderer;
 
         return $this;
     }
