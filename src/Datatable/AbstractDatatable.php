@@ -11,6 +11,7 @@
 
 namespace Sztyup\Datatable;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\Registrar;
@@ -19,7 +20,6 @@ use Sztyup\Datatable\Column\ColumnBuilder;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
 /**
@@ -39,7 +39,7 @@ abstract class AbstractDatatable implements DatatableInterface
     /**
      * The doctrine orm entity manager service.
      *
-     * @var EntityManagerInterface
+     * @var EntityManager
      */
     protected $em;
 
@@ -115,7 +115,7 @@ abstract class AbstractDatatable implements DatatableInterface
      *
      * @param Guard $authGuard
      * @param Registrar $router
-     * @param EntityManagerInterface $em
+     * @param EntityManager $em
      * @param Container $container
      * @throws Exception
      * @throws \TypeError
@@ -123,7 +123,7 @@ abstract class AbstractDatatable implements DatatableInterface
     public function __construct(
         Guard $authGuard,
         Registrar $router,
-        EntityManagerInterface $em,
+        EntityManager $em,
         Container $container
     ) {
         $this->validateName();
@@ -246,6 +246,11 @@ abstract class AbstractDatatable implements DatatableInterface
         }
 
         return $options;
+    }
+
+    public function getGlobalFilters()
+    {
+        return [];
     }
 
     //-------------------------------------------------

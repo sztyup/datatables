@@ -156,6 +156,8 @@ class DatatableQueryBuilder
      */
     private $ajax;
 
+    private $globalFilters;
+
     /**
      * Flag indicating state of query cache for records retrieval. This value is passed to Query object when it is
      * prepared. Default value is false
@@ -217,6 +219,7 @@ class DatatableQueryBuilder
         $this->options = $datatable->getOptions();
         $this->features = $datatable->getFeatures();
         $this->ajax = $datatable->getAjax();
+        $this->globalFilters = $datatable->getGlobalFilters();
 
         $this->initColumnArrays();
     }
@@ -415,6 +418,13 @@ class DatatableQueryBuilder
      */
     private function setWhere(QueryBuilder $qb)
     {
+        foreach ($this->globalFilters as $i => $filter) {
+            if (count($filter) == 2) {
+                $qb->andWhere($qb->expr()->eq($filter[0], ':globalFilter' . $i));
+                $qb->setParameter('globalFilter' . $i, $filter[1]);
+            }
+        }
+
         // global filtering
         if (isset($this->requestParams['search']) && '' != $this->requestParams['search']['value']) {
             $orExpr = $qb->expr()->orX();

@@ -125,4 +125,11 @@ interface DatatableInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Returns the global filtering to be applied
+     *
+     * @return array
+     */
+    public function getGlobalFilters();
 }
