@@ -36,13 +36,6 @@ class VirtualColumn extends Column
      */
     protected $searchColumn;
 
-    /**
-     * The function to calculate cell content
-     *
-     * @var null|\Closure
-     */
-    protected $calc;
-
     //-------------------------------------------------
     // Options
     //-------------------------------------------------
@@ -96,13 +89,6 @@ class VirtualColumn extends Column
     //-------------------------------------------------
     // ColumnInterface
     //-------------------------------------------------
-
-    public function renderSingleField(array &$row)
-    {
-        $row[$this->getData()] = call_user_func_array($this->getCalc(), func_get_args());
-
-        return $row;
-    }
 
     /**
      * {@inheritdoc}
@@ -168,25 +154,6 @@ class VirtualColumn extends Column
     public function setSearchColumn($searchColumn)
     {
         $this->searchColumn = $searchColumn;
-
-        return $this;
-    }
-
-    /**
-     * @return \Closure|null
-     */
-    public function getCalc()
-    {
-        return $this->calc;
-    }
-
-    /**
-     * @param \Closure|null $calc
-     * @return VirtualColumn
-     */
-    public function setCalc($calc)
-    {
-        $this->calc = $calc;
 
         return $this;
     }

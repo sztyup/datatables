@@ -106,6 +106,11 @@ abstract class AbstractDatatable implements DatatableInterface
      */
     protected $accessor;
 
+    /**
+     * @var array
+     */
+    protected $extraSelect;
+
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -249,6 +254,11 @@ abstract class AbstractDatatable implements DatatableInterface
     }
 
     public function getGlobalFilters()
+    {
+        return [];
+    }
+
+    public function getExtraSelects()
     {
         return [];
     }

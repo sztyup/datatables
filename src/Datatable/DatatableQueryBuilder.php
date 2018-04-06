@@ -420,7 +420,7 @@ class DatatableQueryBuilder
     {
         foreach ($this->globalFilters as $i => $filter) {
             if (count($filter) == 2) {
-                $qb->andWhere($qb->expr()->eq($filter[0], ':globalFilter' . $i));
+                $qb->andWhere($qb->expr()->eq($this->entityShortName . '.' . $filter[0], ':globalFilter' . $i));
                 $qb->setParameter('globalFilter' . $i, $filter[1]);
             }
         }

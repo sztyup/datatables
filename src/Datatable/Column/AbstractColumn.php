@@ -217,6 +217,13 @@ abstract class AbstractColumn implements ColumnInterface
      */
     protected $dql;
 
+    /**
+     * The function to calculate cell content
+     *
+     * @var null|\Closure
+     */
+    protected $calc;
+
     //-------------------------------------------------
     // Extensions Options
     //-------------------------------------------------
@@ -317,6 +324,7 @@ abstract class AbstractColumn implements ColumnInterface
             'content_padding' => null,
             'default_content' => null,
             'name' => null,
+            'calc' => null,
             'orderable' => true,
             'order_data' => null,
             'order_sequence' => null,
@@ -337,6 +345,7 @@ abstract class AbstractColumn implements ColumnInterface
         $resolver->setAllowedTypes('data', ['null', 'string']);
         $resolver->setAllowedTypes('default_content', ['null', 'string']);
         $resolver->setAllowedTypes('name', ['null', 'string']);
+        $resolver->setAllowedTypes('calc', ['null', 'Closure']);
         $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('order_data', ['null', 'array', 'int']);
         $resolver->setAllowedTypes('order_sequence', ['null', 'array']);
@@ -435,6 +444,10 @@ abstract class AbstractColumn implements ColumnInterface
      */
     public function renderCellContent(array &$row)
     {
+        if (is_callable($this->getCalc())) {
+            call_user_func_array($this->getCalc(), [$row]);
+        }
+
         $this->isToManyAssociation() ? $this->renderToMany($row) : $this->renderSingleField($row);
     }
 
@@ -1076,5 +1089,21 @@ abstract class AbstractColumn implements ColumnInterface
         $this->renderer = $renderer;
 
         return $this;
+    }
+
+    /**
+     * @return \Closure|null
+     */
+    public function getCalc()
+    {
+        return $this->calc;
+    }
+
+    /**
+     * @param \Closure|null $calc
+     */
+    public function setCalc($calc)
+    {
+        $this->calc = $calc;
     }
 }

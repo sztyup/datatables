@@ -132,4 +132,9 @@ interface DatatableInterface
      * @return array
      */
     public function getGlobalFilters();
+
+    /**
+     * @return array
+     */
+    public function getExtraSelects();
 }
