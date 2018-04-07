@@ -445,7 +445,7 @@ abstract class AbstractColumn implements ColumnInterface
     public function renderCellContent(array &$row)
     {
         if (is_callable($this->getCalc())) {
-            call_user_func_array($this->getCalc(), [$row]);
+            call_user_func_array($this->getCalc(), [&$row]);
         }
 
         $this->isToManyAssociation() ? $this->renderToMany($row) : $this->renderSingleField($row);
