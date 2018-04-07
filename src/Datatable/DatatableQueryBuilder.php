@@ -289,8 +289,10 @@ class DatatableQueryBuilder
 
                         foreach ($embedded->getFieldNames() as $field) {
                             $this->addSelectColumn($currentAlias, $parts[0] . '.' . $field);
-                            $this->addSearchOrderColumn($column, $currentAlias, $parts[0] . '.' . $field);
                         }
+
+                        $this->searchColumns[] = null;
+                        $this->orderColumns[] = null;
                     }
                 }
 
@@ -300,6 +302,8 @@ class DatatableQueryBuilder
                     $this->addSelectColumn($currentAlias, $parts[0]);
                     $this->addSearchOrderColumn($column, $currentAlias, $parts[0]);
                 }
+
+                unset($embedded);
             } else {
                 // Add Order-Field for VirtualColumn
                 if ($this->accessor->isReadable($column, 'orderColumn') &&
