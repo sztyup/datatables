@@ -325,6 +325,7 @@ abstract class AbstractColumn implements ColumnInterface
             'default_content' => null,
             'name' => null,
             'calc' => null,
+            'renderer' => null,
             'orderable' => true,
             'order_data' => null,
             'order_sequence' => null,
@@ -346,6 +347,7 @@ abstract class AbstractColumn implements ColumnInterface
         $resolver->setAllowedTypes('default_content', ['null', 'string']);
         $resolver->setAllowedTypes('name', ['null', 'string']);
         $resolver->setAllowedTypes('calc', ['null', 'Closure']);
+        $resolver->setAllowedTypes('renderer', ['null', 'string']);
         $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('order_data', ['null', 'array', 'int']);
         $resolver->setAllowedTypes('order_sequence', ['null', 'array']);
