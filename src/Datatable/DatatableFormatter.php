@@ -103,12 +103,12 @@ class DatatableFormatter
                 }
             }
 
+            $row = $this->formatIfEmbeddable($row);
+
             // 2. Call the the lineFormatter to format row items
             if (null !== $lineFormatter && is_callable($lineFormatter)) {
                 $row = call_user_func($datatable->getLineFormatter(), $row);
             }
-
-            $row = $this->formatIfEmbeddable($row);
 
             /** @var ColumnInterface $column */
             foreach ($columns as $column) {
