@@ -12,7 +12,7 @@
 namespace Sztyup\Datatable;
 
 use Doctrine\ORM\EntityManager;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Support\Str;
@@ -111,6 +111,11 @@ abstract class AbstractDatatable implements DatatableInterface
      */
     protected $extraSelect;
 
+    /**
+     * @var AuthManager
+     */
+    protected $authManager;
+
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -118,15 +123,14 @@ abstract class AbstractDatatable implements DatatableInterface
     /**
      * AbstractDatatable constructor.
      *
-     * @param Guard $authGuard
+     * @param AuthManager $authManager
      * @param Registrar $router
      * @param EntityManager $em
      * @param Container $container
-     * @throws Exception
-     * @throws \TypeError
+     * @internal param Guard $authGuard
      */
     public function __construct(
-        Guard $authGuard,
+        AuthManager $authManager,
         Registrar $router,
         EntityManager $em,
         Container $container
@@ -135,6 +139,7 @@ abstract class AbstractDatatable implements DatatableInterface
 
         $this->router = $router;
         $this->em = $em;
+        $this->authManager = $authManager;
 
         $metadata = $em->getClassMetadata($this->getEntity());
         $this->columnBuilder = new ColumnBuilder($metadata, $this->getName(), $em, $container);
