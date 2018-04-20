@@ -114,7 +114,7 @@ class DatatableResponse
      * @return \Illuminate\Contracts\View\View|JsonResponse
      * @throws Exception
      */
-    public function getResponse($datatable, $view, $viewData)
+    public function getResponse($datatable, $view, $viewData = [])
     {
         /** @var AbstractDatatable $datatable */
         $datatable = $this->container->make($datatable);
