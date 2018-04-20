@@ -13,6 +13,9 @@ namespace Sztyup\Datatable;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Sztyup\Datatable\Column\ColumnInterface;
@@ -55,6 +58,21 @@ class DatatableResponse
      */
     private $datatableQueryBuilder;
 
+    /**
+     * @var Factory
+     */
+    private $viewFactory;
+
+    /**
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
+    /**
+     * @var bool
+     */
+    private $debug;
+
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -63,13 +81,55 @@ class DatatableResponse
      * DatatableResponse constructor.
      *
      * @param Request $request
-     * @param DatatableInterface $datatable
+     * @param Factory $viewFactory
+     * @param ResponseFactory $responseFactory
+     * @param Repository $config
      */
-    public function __construct(Request $request, DatatableInterface $datatable)
-    {
+    public function __construct(
+        Request $request,
+        Factory $viewFactory,
+        ResponseFactory $responseFactory,
+        Repository $config
+    ) {
         $this->request = $request;
-        $this->datatable = $datatable;
         $this->datatableQueryBuilder = null;
+        $this->viewFactory = $viewFactory;
+        $this->responseFactory = $responseFactory;
+        $this->debug = $config->get('app.debug');
+    }
+
+    /**
+     * @param DatatableInterface $datatable
+     * @param $view
+     * @param $viewData
+     * @return \Illuminate\Contracts\View\View|JsonResponse
+     * @throws Exception
+     */
+    public function getResponse(DatatableInterface $datatable, $view, $viewData)
+    {
+        $datatable->buildDatatable();
+
+        $this->setDatatable($datatable);
+
+        if ($this->request->method() == 'POST' && $this->request->isXmlHttpRequest()) {
+            try {
+                return $this->responseFactory->json(
+                    $this->getResponseData()
+                );
+            } catch (\Exception $e) {
+                if ($this->debug) {
+                    throw $e;
+                }
+
+                return $this->responseFactory->json([
+                    'error' => "\nHiba történt a táblázat megjelenítése közben"
+                ]);
+            }
+        } else {
+            return $this->viewFactory->make($view, array_merge($viewData, [
+                'dataTable' => $this
+            ]));
+        }
     }
 
     //-------------------------------------------------
@@ -107,7 +167,7 @@ class DatatableResponse
      * @throws Exception
      * @throws \TypeError
      */
-    public function getResponse()
+    protected function getResponseData()
     {
         if (null === $this->datatable) {
             throw new Exception('Set a Datatable class with setDatatable().');
@@ -133,7 +193,7 @@ class DatatableResponse
             'recordsTotal' => (int) $this->datatableQueryBuilder->getCountAllResults(),
         ];
 
-        return new JsonResponse(array_merge($outputHeader, $formatter->getOutput()));
+        return array_merge($outputHeader, $formatter->getOutput());
     }
 
     //-------------------------------------------------
