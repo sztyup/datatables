@@ -14,6 +14,7 @@ namespace Sztyup\Datatable;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
@@ -50,6 +51,11 @@ class DatatableResponse
     private $datatable;
 
     /**
+     * @var Container
+     */
+    private $container;
+
+    /**
      * A DatatableQueryBuilder instance.
      * This class generates a Query by given Columns.
      * Default: null
@@ -84,13 +90,16 @@ class DatatableResponse
      * @param Factory $viewFactory
      * @param ResponseFactory $responseFactory
      * @param Repository $config
+     * @param Container $container
      */
     public function __construct(
         Request $request,
         Factory $viewFactory,
         ResponseFactory $responseFactory,
-        Repository $config
+        Repository $config,
+        Container $container
     ) {
+        $this->container = $container;
         $this->request = $request;
         $this->datatableQueryBuilder = null;
         $this->viewFactory = $viewFactory;
@@ -99,14 +108,16 @@ class DatatableResponse
     }
 
     /**
-     * @param DatatableInterface $datatable
+     * @param string $datatable
      * @param $view
      * @param $viewData
      * @return \Illuminate\Contracts\View\View|JsonResponse
      * @throws Exception
      */
-    public function getResponse(DatatableInterface $datatable, $view, $viewData)
+    public function getResponse($datatable, $view, $viewData)
     {
+        /** @var AbstractDatatable $datatable */
+        $datatable = $this->container->make($datatable);
         $datatable->buildDatatable();
 
         $this->setDatatable($datatable);
