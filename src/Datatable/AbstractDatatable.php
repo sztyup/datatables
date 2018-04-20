@@ -127,7 +127,7 @@ abstract class AbstractDatatable implements DatatableInterface
      * @param Registrar $router
      * @param EntityManager $em
      * @param Container $container
-     * @internal param Guard $authGuard
+     * @throws Exception
      */
     public function __construct(
         AuthManager $authManager,
