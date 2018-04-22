@@ -193,7 +193,7 @@ class DatatableResponse
         }
 
         $paginator = new Paginator($this->datatableQueryBuilder->execute(), true);
-        $paginator->setUseOutputWalkers(false);
+        $paginator->setUseOutputWalkers(true);
 
         $formatter = new DatatableFormatter();
         $formatter->runFormatter($paginator, $this->datatable);
