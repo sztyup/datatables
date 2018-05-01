@@ -138,7 +138,7 @@ class DatatableResponse
             }
         } else {
             return $this->viewFactory->make($view, array_merge($viewData, [
-                'dataTable' => $this
+                'dataTable' => $this->datatable
             ]));
         }
     }
