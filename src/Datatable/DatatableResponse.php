@@ -123,19 +123,9 @@ class DatatableResponse
         $this->setDatatable($datatable);
 
         if ($this->request->method() == 'POST' && $this->request->isXmlHttpRequest()) {
-            try {
-                return $this->responseFactory->json(
-                    $this->getResponseData()
-                );
-            } catch (\Exception $e) {
-                if ($this->debug) {
-                    throw $e;
-                }
-
-                return $this->responseFactory->json([
-                    'error' => "\nHiba történt a táblázat megjelenítése közben"
-                ]);
-            }
+            return $this->responseFactory->json(
+                $this->getResponseData()
+            );
         } else {
             return $this->viewFactory->make($view, array_merge($viewData, [
                 'dataTable' => $this->datatable
