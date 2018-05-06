@@ -96,7 +96,7 @@ class DatatableFormatter
 
                 /** @noinspection PhpUndefinedMethodInspection */
                 if (false === $column->isAssociation()) {
-                    if (null !== $dql && $dql !== $data && false === array_key_exists($data, $row)) {
+                    if (null !== $dql && $dql !== $data && false === array_key_exists($data, $row) && !is_array($row[$dql])) {
                         $row[$data] = $row[$dql];
                         unset($row[$dql]);
                     }
