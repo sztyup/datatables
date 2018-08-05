@@ -192,6 +192,10 @@ class DatatableResponse
             throw new Exception('A DatatableQueryBuilder instance is needed. Call getDatatableQueryBuilder().');
         }
 
+        foreach ($this->modifiers as $modifier) {
+            $this->datatableQueryBuilder->addModifier($modifier);
+        }
+
         $paginator = new Paginator($this->datatableQueryBuilder->execute(), true);
         $paginator->setUseOutputWalkers(true);
 
