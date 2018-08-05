@@ -112,7 +112,7 @@ class DatatableResponse
 
     public function addModifier(\Closure $closure)
     {
-        $this->datatableQueryBuilder->addModifier($closure);
+        $this->modifiers[] = $closure;
 
         return $this;
     }
