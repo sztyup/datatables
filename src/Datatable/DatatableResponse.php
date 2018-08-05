@@ -79,6 +79,9 @@ class DatatableResponse
      */
     private $debug;
 
+    /** @var array */
+    protected $modifiers = [];
+
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -105,6 +108,13 @@ class DatatableResponse
         $this->viewFactory = $viewFactory;
         $this->responseFactory = $responseFactory;
         $this->debug = $config->get('app.debug');
+    }
+
+    public function addModifier(\Closure $closure)
+    {
+        $this->datatableQueryBuilder->addModifier($closure);
+
+        return $this;
     }
 
     /**

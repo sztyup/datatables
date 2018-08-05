@@ -158,6 +158,8 @@ class DatatableQueryBuilder
 
     private $globalFilters;
 
+    private $modifiers = [];
+
     /**
      * Flag indicating state of query cache for records retrieval. This value is passed to Query object when it is
      * prepared. Default value is false
@@ -235,6 +237,13 @@ class DatatableQueryBuilder
                 $qb->setParameter('globalFilter' . $i, $filter[1]);
             }
         }
+    }
+
+    public function addModifier(\Closure $closure)
+    {
+        $this->modifiers[] = $closure;
+
+        return $this;
     }
 
     /**
@@ -573,6 +582,10 @@ class DatatableQueryBuilder
     public function execute()
     {
         $qb = $this->getBuiltQb();
+
+        foreach ($this->modifiers as $modifier) {
+            $qb = $modifier($qb);
+        }
 
         $query = $qb->getQuery();
         $query->setHydrationMode(Query::HYDRATE_ARRAY)->useQueryCache($this->useQueryCache);
