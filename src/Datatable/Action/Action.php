@@ -18,6 +18,7 @@ use Sztyup\Datatable\RenderIfTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Exception;
 use Closure;
+use TypeError;
 
 /**
  * Class Action
@@ -138,7 +139,7 @@ class Action
      *
      * @param string $datatableName
      * @throws Exception
-     * @throws \TypeError
+     * @throws TypeError
      */
     public function __construct($datatableName)
     {
