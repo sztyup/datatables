@@ -18,10 +18,10 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "illuminate/contracts": "^5.5",
+        "illuminate/contracts": "^6.0",
         "symfony/options-resolver": "^3.0|^4.0",
         "symfony/property-access": "^3.0|^4.0",
-        "laravel-doctrine/orm": "^1.4"
+        "laravel-doctrine/orm": "^1.5"
     },
     "autoload": {
         "psr-4": {
