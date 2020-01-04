@@ -18,14 +18,14 @@ class DatatableServiceProvider extends ServiceProvider
         $blade->directive("datatablejs", function ($expression) {
             return "<?php echo \$__env->make(" .
                 "'datatables::datatable.datatable_js'," .
-                "array_except(get_defined_vars() + ['datatable' => \$dataTable], array('__data', '__path'))" .
+                "\Illuminate\Support\Arr::except(get_defined_vars() + ['datatable' => \$dataTable], array('__data', '__path'))" .
                 ")->render(); ?>";
         });
 
         $blade->directive("datatable", function ($expression) {
             return "<?php echo \$__env->make(" .
                 "'datatables::datatable.datatable_html'," .
-                "array_except(get_defined_vars() + ['datatable' => \$dataTable], array('__data', '__path'))" .
+                "\Illuminate\Support\Arr::except(get_defined_vars() + ['datatable' => \$dataTable], array('__data', '__path'))" .
                 ")->render(); ?>";
         });
     }
