@@ -17,11 +17,11 @@
         "issues": "https://github.com/sztyup/datatables/issues"
     },
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/contracts": "^6.0",
-        "symfony/options-resolver": "^3.0|^4.0",
-        "symfony/property-access": "^3.0|^4.0",
-        "laravel-doctrine/orm": "^1.5"
+        "php": ">=7.2.0",
+        "illuminate/contracts": "^7.0",
+        "symfony/options-resolver": "^3.0|^4.0|^5.0",
+        "symfony/property-access": "^3.0|^4.0|^5.0",
+        "laravel-doctrine/orm": "^1.6"
     },
     "autoload": {
         "psr-4": {
