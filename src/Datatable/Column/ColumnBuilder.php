@@ -11,9 +11,8 @@
 
 namespace Sztyup\Datatable\Column;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Illuminate\Contracts\Container\Container;
-
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
